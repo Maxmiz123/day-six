@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Wardrobe</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">&#128084;</span>
+        <h1>My Wardrobe</h1>
+      </div>
+      <button class="btn-primary" id="openAddModal">+ Add Item</button>
+    </div>
+  </header>
+
+  <!-- Toolbar -->
+  <div class="toolbar">
+    <input type="text" id="searchInput" placeholder="Search by name, brand or color…" />
+    <div class="category-filters" id="categoryFilters">
+      <button class="filter-btn active" data-cat="All">All</button>
+      <button class="filter-btn" data-cat="Tops">Tops</button>
+      <button class="filter-btn" data-cat="Bottoms">Bottoms</button>
+      <button class="filter-btn" data-cat="Dresses">Dresses</button>
+      <button class="filter-btn" data-cat="Outerwear">Outerwear</button>
+      <button class="filter-btn" data-cat="Shoes">Shoes</button>
+      <button class="filter-btn" data-cat="Accessories">Accessories</button>
+      <button class="filter-btn" data-cat="Other">Other</button>
+    </div>
+  </div>
+
+  <!-- Stats bar -->
+  <div class="stats-bar">
+    <span id="itemCount">0 items</span>
+  </div>
+
+  <!-- Grid -->
+  <main>
+    <div class="grid" id="itemGrid"></div>
+    <div class="empty-state" id="emptyState" style="display:none;">
+      <div class="empty-icon">&#128084;</div>
+      <p>Your wardrobe is empty.</p>
+      <p>Click <strong>+ Add Item</strong> to start building your collection.</p>
+    </div>
+  </main>
+
+  <!-- Add / Edit Modal -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 id="modalTitle">Add Clothing Item</h2>
+        <button class="close-btn" id="closeModal">&times;</button>
+      </div>
+      <form id="itemForm" enctype="multipart/form-data">
+        <input type="hidden" id="editId" />
+
+        <div class="photo-upload-area" id="photoUploadArea">
+          <img id="photoPreview" src="" alt="" style="display:none;" />
+          <div class="photo-placeholder" id="photoPlaceholder">
+            <span>&#128247;</span>
+            <p>Click to add photo</p>
+          </div>
+          <input type="file" id="photoInput" accept="image/*" />
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Name <span class="required">*</span></label>
+            <input type="text" id="fieldName" placeholder="e.g. White linen shirt" required />
+          </div>
+          <div class="form-group">
+            <label>Category <span class="required">*</span></label>
+            <select id="fieldCategory" required>
+              <option value="">Select…</option>
+              <option>Tops</option>
+              <option>Bottoms</option>
+              <option>Dresses</option>
+              <option>Outerwear</option>
+              <option>Shoes</option>
+              <option>Accessories</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Brand</label>
+            <input type="text" id="fieldBrand" placeholder="e.g. Zara" />
+          </div>
+          <div class="form-group">
+            <label>Size</label>
+            <input type="text" id="fieldSize" placeholder="e.g. M, 32, 9.5" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Color</label>
+          <input type="text" id="fieldColor" placeholder="e.g. Navy blue" />
+        </div>
+
+        <div class="form-group">
+          <label>Notes</label>
+          <textarea id="fieldNotes" placeholder="Occasion, care instructions, outfit ideas…" rows="3"></textarea>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="btn-secondary" id="cancelModal">Cancel</button>
+          <button type="submit" class="btn-primary" id="submitBtn">Save Item</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Item Detail Modal -->
+  <div class="modal-overlay" id="detailOverlay">
+    <div class="modal modal-detail">
+      <button class="close-btn" id="closeDetail">&times;</button>
+      <div class="detail-body" id="detailBody"></div>
+      <div class="detail-actions">
+        <button class="btn-secondary" id="editItemBtn">Edit</button>
+        <button class="btn-danger" id="deleteItemBtn">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
